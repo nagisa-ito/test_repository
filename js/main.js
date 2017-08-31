@@ -9,7 +9,7 @@ $(function() {
         $("#input_form").css("display", "none");
     });
 });
-
+//
 //ajax処理
 $(function() {
     $('#ajax_button').click(function() {
