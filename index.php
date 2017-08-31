@@ -3,7 +3,7 @@
  require_once(__DIR__ . '/config.php');
  require_once(__DIR__ . '/functions.php');
  require_once(__DIR__ . '/Staff.php');
- 
+
  //get staffs
  $staffApp = new \TransApp\Staff();
  $staffs = $staffApp->getAll();
@@ -12,6 +12,7 @@
  //$id = $staffApp->getID(2);
  //echo $id->id;
 
+ echo "git";
 
  ?>
 
