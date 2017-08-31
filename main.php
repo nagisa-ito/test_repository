@@ -53,9 +53,9 @@
                 <p>日付: <input type="date" name="new_date" id="new_date"></p>
                 <p>クライアント名: <input type="text" name="new_client" id="new_client"></p>
                 <p>交通機関:
-                    <input type="radio" name="new_vehicle" id="new_vehicle" value="電車">電車
-                    <input type="radio" name="new_vehicle" id="new_vehicle" value="バス">バス
-                    <input type="radio" name="new_vehicle" id="new_vehicle" value="飛行機">飛行機
+                    <input type="radio" name="new_vehicle" id="new_vehicle" value="1">電車
+                    <input type="radio" name="new_vehicle" id="new_vehicle" value="2">バス
+                    <input type="radio" name="new_vehicle" id="new_vehicle" value="3">飛行機
                 </p>
                 <p>利用区間: <input type="text" name="new_from" id="new_from"> から <input type="text" name="new_to" id="new_to"> まで</p>
                 <p>料金: <input type="text" name="new_cost"id="new_cost"></p>
@@ -83,8 +83,8 @@
                   <th><?php echo $element->date; ?></th>
                   <th><?php echo $element->client; ?></th>
                   <th><?php echo $element->vehicle_id; ?></th>
-                  <th><?php echo $element->from; ?></th>
-                  <th><?php echo $element->to; ?></th>
+                  <th><?php echo $element->_from; ?></th>
+                  <th><?php echo $element->_to; ?></th>
                   <th><?php echo $element->cost; ?></th>
                   <th><?php echo $element->overview; ?></th>
                 </tr>

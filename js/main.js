@@ -17,8 +17,9 @@ $(function() {
             date : $('#new_date').val(),
             client : $('#new_client').val(),
             vehicle : $('#new_vehicle').val(),
-            from : $('#new_from').val(),
-            to : $('#new_to').val(),
+            _from : $('#new_from').val(),
+            _to : $('#new_to').val(),
+            cost : $('#new_cost').val(),
             overview : $('#new_overview').val()
         };
         $.ajax({

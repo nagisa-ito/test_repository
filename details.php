@@ -31,7 +31,6 @@
     //print_r($staff_id);
 
     //配列の中身を文字列で格納し、コンマで区切る
-    $array = array(1,4);
     $str=implode(",", $staff_id);
 
     $stmt = $this->_db->query("select *
