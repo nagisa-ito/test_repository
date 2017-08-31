@@ -49,24 +49,25 @@
         <div><input type = "button" value="追加" id="show_button"></div>
             <!--ここから非表示-->
         <div id="input_form">
-            <form method="post" id="send_data" action="add.php">
-                <p>日付: <input type="date" name="new_date"/></p>
-                <p>クライアント名: <input type="text" name="new_client"/></p>
+            <form method="post" id="send_data" action="POST">
+                <p>日付: <input type="date" name="new_date" id="new_date"></p>
+                <p>クライアント名: <input type="text" name="new_client" id="new_client"></p>
                 <p>交通機関:
-                    <input type="radio" name="new_vehicle" value="電車"/>電車
-                    <input type="radio" name="new_vehicle" value="バス"/>バス
-                    <input type="radio" name="new_vehicle" value="飛行機"/>飛行機
+                    <input type="radio" name="new_vehicle" id="new_vehicle" value="電車">電車
+                    <input type="radio" name="new_vehicle" id="new_vehicle" value="バス">バス
+                    <input type="radio" name="new_vehicle" id="new_vehicle" value="飛行機">飛行機
                 </p>
-                <p>利用区間: <input type="text" name="new_from"/> から <input type="text" name="new_to"/> まで</p>
-                <p>料金: <input type="text" name="new_cost"/></p>
-                <p><textarea name="new_overview" rows="4" cols="40">特記事項</textarea></p>
+                <p>利用区間: <input type="text" name="new_from" id="new_from"> から <input type="text" name="new_to" id="new_to"> まで</p>
+                <p>料金: <input type="text" name="new_cost"id="new_cost"></p>
+                <p><textarea name="new_overview" rows="4" cols="40" id="new_overview">特記事項</textarea></p>
             <div>
-                <input type = "submit" value="確定">
+                <input type = "button" value="確定" id="ajax_button">
             </form>
                 <input type = "button" value="取消" id="hide_button">
             </div>
         </div>
             <!--ここまで非表示-->
+        <div id="result"></div>
             <table border="1">
                 <tr>
                   <th>日付</th>
