@@ -20,7 +20,8 @@ $(function() {
             _from : $('#new_from').val(),
             _to : $('#new_to').val(),
             cost : $('#new_cost').val(),
-            overview : $('#new_overview').val()
+            overview : $('#new_overview').val(),
+            staff_id : $('#staff_id_hidden').val()
         };
         $.ajax({
             type: "POST",

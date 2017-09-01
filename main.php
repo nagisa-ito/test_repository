@@ -17,6 +17,7 @@
   $requests =  $reqApp->getAll();
   //var_dump($requests);
   $selected_staff = $reqApp->getStaffID($id->id);
+  $selected_staff_id = $selected_staff[0]->staff_id; //選択したスタッフのID
 
   //details.php
   $detailApp = new \detailApp\Detail();
@@ -50,6 +51,7 @@
             <!--ここから非表示-->
         <div id="input_form">
             <form method="post" id="send_data" action="POST">
+                <input id="staff_id_hidden" type="hidden" value="<?php echo $selected_staff_id; ?>" name="staff_id_hidden">
                 <p>日付: <input type="date" name="new_date" id="new_date"></p>
                 <p>クライアント名: <input type="text" name="new_client" id="new_client"></p>
                 <p>交通機関:
@@ -70,6 +72,7 @@
         <div id="result"></div>
             <table border="1">
                 <tr>
+                  <th>申請ID</th>
                   <th>日付</th>
                   <th>クライアント名</th>
                   <th>交通機関</th>
@@ -80,6 +83,7 @@
                 <!-- 申請数(request_id)のぶん、行として表示 -->
                 <?php foreach ($table_element as $element) : ?>
                 <tr>
+                  <th><?php echo $element->id; ?></th>
                   <th><?php echo $element->date; ?></th>
                   <th><?php echo $element->client; ?></th>
                   <th><?php echo $element->vehicle_id; ?></th>

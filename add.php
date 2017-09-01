@@ -2,12 +2,12 @@
 
 require_once(__DIR__ . '/config.php');
 require_once(__DIR__ . '/functions.php');
-require_once(__DIR__ . '/details.php');
 
 header("Content-type: text/plain; charset=UTF-8");
 if (isset($_POST['date'])){
         //ここに何かしらの処理を書く（DB登録やファイルへの書き込みなど）
             //DBへの接続
+
             try {
               $state = new \PDO(DSN, DB_USERNAME, DB_PASSWORD);
               $state -> setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
@@ -58,9 +58,17 @@ if (isset($_POST['date'])){
                 }
                 $sql = null;
 
+                //リクエストテーブルへの追加
+                $add_request = $state->prepare("insert into requests (staff_id) values (:staff_id)");
+                $staff_id = $_POST['staff_id'];
+                $add_request -> bindValue(':staff_id', $staff_id);
+
+                if(!$add_request->execute()){
+                    echo "requestテーブルへの追加が失敗しました。";
+                }
+                $add_request = null;
 
         //echoが返り値？？？？
-        echo $_POST['date'];
         echo "登録が完了しました。";
 }
 else

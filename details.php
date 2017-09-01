@@ -35,7 +35,7 @@
 
     $stmt = $this->_db->query("select *
                               from request_details
-                              where request_id
+                              where id
                               in ($str);");
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }
