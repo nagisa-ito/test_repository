@@ -2,10 +2,8 @@
  require_once(__DIR__ . '/config.php');
  require_once(__DIR__ . '/functions.php');
  require_once(__DIR__ . '/Staff.php');
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
+
  //get staffs
  $staffApp = new \TransApp\Staff();
  $staffs = $staffApp->getAll();
@@ -13,11 +11,6 @@
  //$id = $staffApp->getID(2);
  //echo $id->id;
 
-<<<<<<< HEAD
-=======
- echo "git";
-
->>>>>>> origin/master
  ?>
 
  <!DOCTYPE html>

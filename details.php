@@ -24,11 +24,9 @@
 
     //オブジェクトを配列に変換する。
     $to_array_staff = json_decode(json_encode($selected_staff), true);
-    //var_dump($to_array_staff);
 
     //カラムがidの値を配列で取得
     $staff_id = array_column($to_array_staff, 'id');
-    //print_r($staff_id);
 
     //配列の中身を文字列で格納し、コンマで区切る
     $str=implode(",", $staff_id);
@@ -38,6 +36,15 @@
                               where id
                               in ($str);");
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
+  }
+
+  public function getTotalCost($selected_staff){
+      $to_array_staff = json_decode(json_encode($selected_staff), true);
+      $staff_id = array_column($to_array_staff, 'id');
+      $str=implode(",", $staff_id);
+
+      $stmt = $this->_db->query("select sum(cost) from request_details where id in ($str)");
+      return $stmt->fetch(\PDO::FETCH_OBJ);
   }
 
 }

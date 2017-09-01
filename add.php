@@ -3,7 +3,7 @@
 require_once(__DIR__ . '/config.php');
 require_once(__DIR__ . '/functions.php');
 
-<<<<<<< HEAD
+
 header("Content-type: text/plain; charset=UTF-8");
 if (isset($_POST['date'])){
         //ここに何かしらの処理を書く（DB登録やファイルへの書き込みなど）
@@ -16,21 +16,7 @@ if (isset($_POST['date'])){
               echo $e->getMessage();
               exit;
             }
-=======
-public function Add($date) {
-    $sql = "insert into
-            request_details date
-            values :date";
-    $stmt = $this->_db->prepare($sql);
-    $stmt -> bindParam(':date', $date);
-    $stmt -> execute();
-    return;
-}
-//
-}
->>>>>>> origin/master
 
-            print_r($_POST);
 
             $sql = $state->prepare("insert into request_details (
                                     date,
@@ -44,7 +30,7 @@ public function Add($date) {
                                     values(
                                     :date,
                                     :client,
-                                    :vehicle,
+                                    :vehicle_id,
                                     :_from,
                                     :_to,
                                     :cost,
@@ -53,7 +39,7 @@ public function Add($date) {
 
                 $new_date = $_POST['date'];
                 $new_client = $_POST['client'];
-                $new_vehicle_id = $_POST['vehicle'];
+                $new_vehicle_id = $_POST['vehicle_id'];
                 $new_from = $_POST['_from'];
                 $new_to = $_POST['_to'];
                 $new_cost = $_POST['cost'];
@@ -61,7 +47,7 @@ public function Add($date) {
                 //echo $new_to;
                 $sql->bindValue(':date', $new_date, PDO::PARAM_STR);
                 $sql->bindValue(':client', $new_client, PDO::PARAM_STR);
-                $sql->bindValue(':vehicle', $new_vehicle_id, PDO::PARAM_STR);
+                $sql->bindValue(':vehicle_id', $new_vehicle_id, PDO::PARAM_STR);
                 $sql->bindValue(':_from', $new_from, PDO::PARAM_STR);
                 $sql->bindValue(':_to', $new_to, PDO::PARAM_STR);
                 $sql->bindValue(':cost', $new_cost, PDO::PARAM_STR);

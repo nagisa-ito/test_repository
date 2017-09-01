@@ -23,9 +23,12 @@
   $detailApp = new \detailApp\Detail();
   $details = $detailApp->getAll();
 
+  //合計金額を持ってくる
+  $total_cost = $detailApp->getTotalCost($selected_staff);
+  $total_cost = json_decode(json_encode($total_cost), true);
+
   //表の要素
   $table_element = $detailApp->getRequestID($selected_staff);
-
 
  ?>
 
@@ -47,21 +50,46 @@
                       <th><?php echo $id->staff_name; ?></th>
                     </tr>
             </table>
-        <div><input type = "button" value="追加" id="show_button"></div>
+            <table border="1">
+                <tr>
+                    <th>合計金額</th>
+                    <th><?php echo $total_cost["sum(cost)"]; ?></th>
+                </tr>
+            </table>
+                <div>
+                    <form>
+                        <input type="month" id="month_filter">
+                        <input type="button" value="絞り込む" id="filter_button">
+                    </form>
+                </div>
+            <span>
+                <input type = "button" value="追加" id="show_button">
+                <input type = "button" value="削除" id="delete_button">
+            </span>
             <!--ここから非表示-->
+            <div id="delete_form">
+                <p>
+                    <form method="post" id="delete_data" action="POST">
+                        <input type="text" id="delete_id" placeholder="削除したい申請IDを入力">
+                        <input type="button" value="確定" id="delete_ajax_button">
+                        <input type="button" value="取消" id="delete_ajax_cancel">
+                    </form>
+                </p>
+            </div>
         <div id="input_form">
             <form method="post" id="send_data" action="POST">
                 <input id="staff_id_hidden" type="hidden" value="<?php echo $selected_staff_id; ?>" name="staff_id_hidden">
                 <p>日付: <input type="date" name="new_date" id="new_date"></p>
                 <p>クライアント名: <input type="text" name="new_client" id="new_client"></p>
                 <p>交通機関:
-                    <input type="radio" name="new_vehicle" id="new_vehicle" value="1">電車
-                    <input type="radio" name="new_vehicle" id="new_vehicle" value="2">バス
-                    <input type="radio" name="new_vehicle" id="new_vehicle" value="3">飛行機
+                    <input type="radio" name="new_vehicle" id="new_vehicle" value="1"/>電車
+                    <input type="radio" name="new_vehicle" id="new_vehicle" value="2"/>バス
+                    <input type="radio" name="new_vehicle" id="new_vehicle" value="3"/>飛行機
+                    <input type="radio" name="new_vehicle" id="new_vehicle" value="4"/>その他
                 </p>
                 <p>利用区間: <input type="text" name="new_from" id="new_from"> から <input type="text" name="new_to" id="new_to"> まで</p>
                 <p>料金: <input type="text" name="new_cost"id="new_cost"></p>
-                <p><textarea name="new_overview" rows="4" cols="40" id="new_overview">特記事項</textarea></p>
+                <p><textarea name="new_overview" rows="4" cols="40" id="new_overview" placeholder="特記事項"></textarea></p>
             <div>
                 <input type = "button" value="確定" id="ajax_button">
             </form>
