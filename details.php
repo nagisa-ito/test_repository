@@ -23,8 +23,10 @@
     //配列の中身を文字列で格納し、コンマで区切る
     $str=implode(",", $staff_id);
     $stmt = $this->_db->query("select *
-                              from request_details
-                              where id
+                              from vehicles
+                              inner join request_details
+                              on vehicles.id = request_details.vehicle_id
+                              where request_details.id
                               in ($str);");
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }

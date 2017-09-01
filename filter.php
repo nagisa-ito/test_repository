@@ -19,9 +19,12 @@
         $month = $_POST['month'];
         $month = str_replace("-", "", $month);
 
-        $stmt = $state->prepare("select * from request_details
-                                     where date_format(date, '%Y%m') = :date
-                                     and id in ($filtering_id)");
+        $stmt = $state->prepare("select * from vehicles
+                                inner join request_details
+                                on vehicles.id = request_details.vehicle_id
+                                where request_details.id in ($filtering_id)
+                                and date_format(date, '%Y%m') = :date");
+                                    
         $stmt->bindValue(':date', $month, PDO::PARAM_STR);
         $stmt->execute();
 

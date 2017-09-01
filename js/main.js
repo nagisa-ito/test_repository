@@ -41,7 +41,6 @@ $(function() {
             url: "add.php",
             data : data,
             success: function(data, dataType){
-                $("#test").prepend("<th>あああ</th>");
                 alert(data);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
@@ -108,7 +107,7 @@ $(function() {
                     str = "<th>" + array_data[i]['id'] + "</th>"
                             + "<th>" + array_data[i]['date'] + "</th>"
                             + "<th>" + array_data[i]['client'] + "</th>"
-                            + "<th>" + array_data[i]['vehicle_id'] + "</th>"
+                            + "<th>" + array_data[i]['vehicle_type'] + "</th>"
                             + "<th>" + array_data[i]['_from'] + "</th>"
                             + "<th>" + array_data[i]['_to'] + "</th>"
                             + "<th>" + array_data[i]['cost'] + "</th>"
@@ -119,7 +118,6 @@ $(function() {
                 }
                 $("#total_cost").html(cost);
                 $(".hide").css("display", "none");
-                alert("データを絞り込みました");
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
                 alert('Error: ' + errorThrown);

@@ -55,6 +55,17 @@
             </table>
             <table border="1">
                 <tr>
+                    <th colspan="2">利用区間</th>
+                    <th>定期代</th>
+                </tr>
+                <tr>
+                    <th><?php echo $id->season_ticket_from ?></th>
+                    <th><?php echo $id->season_ticket_to ?></th>
+                    <th></th>
+                </tr>
+            </table>
+            <table border="1">
+                <tr>
                     <th>合計金額</th>
                     <th id="total_cost"><?php echo $total_cost["sum(cost)"]; ?></th>
                 </tr>
@@ -118,7 +129,7 @@
                           <th><?php echo $element->id; ?></th>
                           <th><?php echo $element->date; ?></th>
                           <th><?php echo $element->client; ?></th>
-                          <th><?php echo $element->vehicle_id; ?></th>
+                          <th><?php echo $element->vehicle_type; ?></th>
                           <th><?php echo $element->_from; ?></th>
                           <th><?php echo $element->_to; ?></th>
                           <th><?php echo $element->cost; ?></th>
