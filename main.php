@@ -30,6 +30,9 @@
   //表の要素
   $table_element = $detailApp->getRequestID($selected_staff);
 
+  //フィルター用のidを保持
+  $filter_req_id = $detailApp->getFilterID($selected_staff);
+
  ?>
 
  <!DOCTYPE html>
@@ -53,11 +56,12 @@
             <table border="1">
                 <tr>
                     <th>合計金額</th>
-                    <th><?php echo $total_cost["sum(cost)"]; ?></th>
+                    <th id="total_cost"><?php echo $total_cost["sum(cost)"]; ?></th>
                 </tr>
             </table>
                 <div>
                     <form>
+                        <input id="filter_req_id" type="hidden" value="<?php echo $filter_req_id; ?>">
                         <input type="month" id="month_filter">
                         <input type="button" value="絞り込む" id="filter_button">
                     </form>
@@ -98,8 +102,8 @@
         </div>
             <!--ここまで非表示-->
         <div id="result"></div>
-            <table border="1">
-                <tr>
+            <table border="1" class="data_table">
+                <tr id="add_row">
                   <th>申請ID</th>
                   <th>日付</th>
                   <th>クライアント名</th>
@@ -109,18 +113,18 @@
                   <th>特記事項</th>
                 </tr>
                 <!-- 申請数(request_id)のぶん、行として表示 -->
-                <?php foreach ($table_element as $element) : ?>
-                <tr>
-                  <th><?php echo $element->id; ?></th>
-                  <th><?php echo $element->date; ?></th>
-                  <th><?php echo $element->client; ?></th>
-                  <th><?php echo $element->vehicle_id; ?></th>
-                  <th><?php echo $element->_from; ?></th>
-                  <th><?php echo $element->_to; ?></th>
-                  <th><?php echo $element->cost; ?></th>
-                  <th><?php echo $element->overview; ?></th>
-                </tr>
-              <?php endforeach; ?>
+                    <?php foreach ($table_element as $element) : ?>
+                        <tr class="hide">
+                          <th><?php echo $element->id; ?></th>
+                          <th><?php echo $element->date; ?></th>
+                          <th><?php echo $element->client; ?></th>
+                          <th><?php echo $element->vehicle_id; ?></th>
+                          <th><?php echo $element->_from; ?></th>
+                          <th><?php echo $element->_to; ?></th>
+                          <th><?php echo $element->cost; ?></th>
+                          <th><?php echo $element->overview; ?></th>
+                        </tr>
+                    <?php endforeach; ?>
             </table>
       </div>
       <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
