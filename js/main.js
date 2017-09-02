@@ -33,6 +33,7 @@ $(function() {
             _from : $('#new_from').val(),
             _to : $('#new_to').val(),
             cost : $('#new_cost').val(),
+            one_way_or_round : $("[name=new_one_way_or_round]:checked").val(),
             overview : $('#new_overview').val(),
             staff_id : $('#staff_id_hidden').val()
         };
@@ -78,6 +79,8 @@ $(function() {
     $("#filter_button").click(function(){
         var test = $('#month_filter').val();
         console.log(test);
+        test = test + "月分";
+        $("#request_month").text(test);
     });
 });
 
@@ -95,29 +98,28 @@ $(function() {
             success: function(data, dataType){
                 //全部繋がった文字列で返ってきているので配列にする
                 var array_data = JSON.parse(data);
-                console.log(array_data);
 
                 var cost = Number(0);
 
                 $(".reset").empty();
                 for(var i = 0; i < array_data.length; i++){
                     cost += Number(array_data[i]['cost']);
-
                     var str = "";
-                    str = "<th>" + array_data[i]['id'] + "</th>"
-                            + "<th>" + array_data[i]['date'] + "</th>"
-                            + "<th>" + array_data[i]['client'] + "</th>"
-                            + "<th>" + array_data[i]['vehicle_type'] + "</th>"
-                            + "<th>" + array_data[i]['_from'] + "</th>"
-                            + "<th>" + array_data[i]['_to'] + "</th>"
-                            + "<th>" + array_data[i]['cost'] + "</th>"
-                            + "<th>" + array_data[i]['overview'] + "</th>";
+                    str = "<td>" + array_data[i]['id'] + "</td>"
+                            + "<td>" + array_data[i]['date'] + "</td>"
+                            + "<td>" + array_data[i]['client'] + "</td>"
+                            + "<td>" + array_data[i]['vehicle_type'] + "</td>"
+                            + "<td>" + array_data[i]['_from'] + "</td>"
+                            + "<td>" + array_data[i]['_to'] + "</td>"
+                            + "<td>" + array_data[i]['cost'] + "</td>"
+                            + "<td>" + array_data[i]['one_way_or_round'] + "</td>"
+                            + "<td>" + array_data[i]['overview'] + "</td>";
 
                     str = "<tr class='reset'>" + str + "</tr>";
                     $("#add_row").after(str);
                 }
                 $("#total_cost").html(cost);
-                $(".hide").css("display", "none");
+                $(".data_all").css("display", "none");
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
                 alert('Error: ' + errorThrown);
@@ -126,3 +128,23 @@ $(function() {
         return false;
     });
 });
+
+function disp(){
+
+	// 「OK」時の処理開始 ＋ 確認ダイアログの表示
+	if(window.confirm('実行しますか？')){
+
+		window.aleat('処理を実行しました。')
+
+	}
+	// 「OK」時の処理終了
+
+	// 「キャンセル」時の処理開始
+	else{
+
+		window.alert('キャンセルされました'); // 警告ダイアログを表示
+
+	}
+	// 「キャンセル」時の処理終了
+
+}

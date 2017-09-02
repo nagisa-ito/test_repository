@@ -5,7 +5,9 @@ require_once(__DIR__ . '/functions.php');
 
 
 header("Content-type: text/plain; charset=UTF-8");
-if (isset($_POST['date'])){
+if (isset($_POST['date']) && isset($_POST['client']) && isset($_POST['vehicle_id'])
+ && isset($_POST['_from']) && isset($_POST['_to']) && isset($_POST['cost']) && isset($_POST['one_way_or_round'])
+ && isset($_POST['overview'])){
         //ここに何かしらの処理を書く（DB登録やファイルへの書き込みなど）
             //DBへの接続
 
@@ -25,6 +27,7 @@ if (isset($_POST['date'])){
                                     _from,
                                     _to,
                                     cost,
+                                    one_way_or_round,
                                     overview
                                     )
                                     values(
@@ -34,6 +37,7 @@ if (isset($_POST['date'])){
                                     :_from,
                                     :_to,
                                     :cost,
+                                    :one_way_or_round,
                                     :overview
                                     )");
 
@@ -43,6 +47,7 @@ if (isset($_POST['date'])){
                 $new_from = $_POST['_from'];
                 $new_to = $_POST['_to'];
                 $new_cost = $_POST['cost'];
+                $new_one_way_or_round = $_POST['one_way_or_round'];
                 $new_overview = $_POST['overview'];
                 //echo $new_to;
                 $sql->bindValue(':date', $new_date, PDO::PARAM_STR);
@@ -51,6 +56,7 @@ if (isset($_POST['date'])){
                 $sql->bindValue(':_from', $new_from, PDO::PARAM_STR);
                 $sql->bindValue(':_to', $new_to, PDO::PARAM_STR);
                 $sql->bindValue(':cost', $new_cost, PDO::PARAM_STR);
+                $sql->bindValue(':one_way_or_round', $new_one_way_or_round, PDO::PARAM_STR);
                 $sql->bindValue(':overview', $new_overview, PDO::PARAM_STR);
 
                 if(!$sql->execute()){
@@ -64,7 +70,7 @@ if (isset($_POST['date'])){
                 $add_request -> bindValue(':staff_id', $staff_id);
 
                 if(!$add_request->execute()){
-                    echo "requestテーブルへの追加が失敗しました。";
+                    echo "データベースの追加が失敗しました。";
                 }
                 $add_request = null;
 
@@ -73,6 +79,6 @@ if (isset($_POST['date'])){
 }
 else
 {
-echo 'The parameter is not found.';
+echo 'データが入力されていません';
 }
 ?>

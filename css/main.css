@@ -5,3 +5,26 @@
 #delete_form{
     display: none;
 }
+
+#check_{
+    float: right;
+}
+
+#total_cost{
+    font-size: 20px;
+}
+
+#buttons{
+    margin-bottom: 10px;
+}
+
+#stamp{
+    width: 100px;
+    height: 100px;
+    border: 1px solid #d8d8d8;
+}
+
+#input_form{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
