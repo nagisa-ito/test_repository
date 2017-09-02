@@ -1,11 +1,11 @@
 <?php
- require_once(__DIR__ . '/config.php');
- require_once(__DIR__ . '/functions.php');
- require_once(__DIR__ . '/Staff.php');
+ require_once(dirname(__FILE__) . '/config.php');
+ require_once(dirname(__FILE__) . '/functions.php');
+ require_once(dirname(__FILE__) . '/Staff.php');
 
 
  //get staffs
- $staffApp = new \TransApp\Staff();
+ $staffApp = new Staff();
  $staffs = $staffApp->getAll();
  //get id
  //$id = $staffApp->getID(2);

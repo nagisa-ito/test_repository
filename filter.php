@@ -1,7 +1,7 @@
 <?php
 
-    require_once(__DIR__ . '/config.php');
-    require_once(__DIR__ . '/functions.php');
+    require_once(dirname(__FILE__) . '/config.php');
+    require_once(dirname(__FILE__) . '/functions.php');
 
     header("Content-type: text/plain; charset=UTF-8");
 
@@ -23,13 +23,14 @@
                                 inner join request_details
                                 on vehicles.id = request_details.vehicle_id
                                 where request_details.id in ($filtering_id)
-                                and date_format(date, '%Y%m') = :date");
-                                    
+                                and date_format(date, '%Y%m') = :date
+                                order by request_details.id desc;");
+
         $stmt->bindValue(':date', $month, PDO::PARAM_STR);
         $stmt->execute();
 
         $filtering_data = $stmt->fetchAll(\PDO::FETCH_OBJ);
-        $json_data = json_encode($filtering_data,JSON_UNESCAPED_UNICODE);
+        $json_data = json_encode($filtering_data);
 
         echo $json_data;
     }else{

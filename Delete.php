@@ -17,6 +17,17 @@ header("Content-type: text/plain; charset=UTF-8");
             }
 
             $delete_id = $_POST['delete_id'];
+            $staff_id = $_POST['staff_id'];
+
+            $stmt = $state->query("select staff_id from requests where id = $delete_id");
+            $judge_id = $stmt->fetch(\PDO::FETCH_OBJ);
+
+            $judge = $judge_id->staff_id;
+
+            if($judge != $staff_id){
+                echo "申請IDが存在しません。";
+                exit;
+            }
 
             $del_sql = $state->prepare("delete from requests where id = :id");
             $del_sql->bindValue(':id', $delete_id, PDO::PARAM_STR);

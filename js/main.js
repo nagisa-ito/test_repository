@@ -57,7 +57,8 @@ $(function() {
 $(function() {
     $('#delete_ajax_button').click(function() {
         var data = {
-            delete_id : $('#delete_id').val(),
+            staff_id : $("#staff_id_hidden").val(),
+            delete_id : $('#delete_id').val()
         };
         $.ajax({
             type: "POST",
@@ -77,10 +78,9 @@ $(function() {
 
 $(function() {
     $("#filter_button").click(function(){
-        var test = $('#month_filter').val();
-        console.log(test);
-        test = test + "月分";
-        $("#request_month").text(test);
+        var month = $('#month_filter').val();
+        month = month + "月分";
+        $("#request_month").text(month);
     });
 });
 
@@ -97,6 +97,7 @@ $(function() {
             data : data,
             success: function(data, dataType){
                 //全部繋がった文字列で返ってきているので配列にする
+                console.log(data);
                 var array_data = JSON.parse(data);
 
                 var cost = Number(0);
@@ -111,13 +112,14 @@ $(function() {
                             + "<td>" + array_data[i]['vehicle_type'] + "</td>"
                             + "<td>" + array_data[i]['_from'] + "</td>"
                             + "<td>" + array_data[i]['_to'] + "</td>"
-                            + "<td>" + array_data[i]['cost'] + "</td>"
+                            + "<td>¥" + array_data[i]['cost'] + "</td>"
                             + "<td>" + array_data[i]['one_way_or_round'] + "</td>"
                             + "<td>" + array_data[i]['overview'] + "</td>";
 
                     str = "<tr class='reset'>" + str + "</tr>";
                     $("#add_row").after(str);
                 }
+                cost = "¥" + cost;
                 $("#total_cost").html(cost);
                 $(".data_all").css("display", "none");
             },
@@ -133,18 +135,13 @@ function disp(){
 
 	// 「OK」時の処理開始 ＋ 確認ダイアログの表示
 	if(window.confirm('実行しますか？')){
-
 		window.aleat('処理を実行しました。')
-
 	}
 	// 「OK」時の処理終了
 
 	// 「キャンセル」時の処理開始
 	else{
-
 		window.alert('キャンセルされました'); // 警告ダイアログを表示
-
 	}
 	// 「キャンセル」時の処理終了
-
 }
