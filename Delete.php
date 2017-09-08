@@ -1,7 +1,7 @@
 <?php
 
-require_once(__DIR__ . '/config.php');
-require_once(__DIR__ . '/functions.php');
+require_once(dirname(__FILE__) . '/config.php');
+require_once(dirname(__FILE__) . '/functions.php');
 
 header("Content-type: text/plain; charset=UTF-8");
     if (isset($_POST['delete_id'])){
@@ -9,9 +9,9 @@ header("Content-type: text/plain; charset=UTF-8");
             //DBへの接続
 
             try {
-              $state = new \PDO(DSN, DB_USERNAME, DB_PASSWORD);
-              $state -> setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-            } catch (\PDOException $e) {
+              $state = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
+              $state -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
               echo $e->getMessage();
               exit;
             }
@@ -20,7 +20,7 @@ header("Content-type: text/plain; charset=UTF-8");
             $staff_id = $_POST['staff_id'];
 
             $stmt = $state->query("select staff_id from requests where id = $delete_id");
-            $judge_id = $stmt->fetch(\PDO::FETCH_OBJ);
+            $judge_id = $stmt->fetch(PDO::FETCH_OBJ);
 
             $judge = $judge_id->staff_id;
 

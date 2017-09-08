@@ -7,9 +7,7 @@
  //get staffs
  $staffApp = new Staff();
  $staffs = $staffApp->getAll();
- //get id
- //$id = $staffApp->getID(2);
- //echo $id->id;
+ 
 
  ?>
 
@@ -29,11 +27,14 @@
     <select name="staff_id" size="1">
       <?php foreach ($staffs as $staff) : ?>
       <option value="<?php echo $staff->id;?>">
-        <?php echo $staff->id . " " . $staff->staff_name; ?> </option>
+        <?php echo h($staff->id) . " " . h($staff->staff_name); ?> </option>
     <?php endforeach; ?>
     </select>
     <div><input type="submit" value="Enter" class="btn btn-default" id="enter_button"></div>
   </form>
+  <form method="post" action="management.php">
+     <div><input type="submit" value="For Master" class="btn btn-primary"></div>
+  </form>	
  </div>
  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>

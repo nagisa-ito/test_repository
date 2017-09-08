@@ -65,8 +65,21 @@
         </table>
         </div>
         <div id="staff_info">
-                <h3>No. <?php echo $id->id . "   " . $id->staff_name; ?></h3>
+                <h3>No. <?php echo $id->id . "   " . h($id->staff_name); ?>
+		<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-cog" style="font-size:20px;"></span></button></h3>
         </div>
+
+	<!--div>
+	  <h5>Please input your new infomation, if you want to change it.</h5>
+	   <form>
+		<p>name : <input type="text"></p>
+		<p>ticket_from :<input type="text"></p>
+		<p>ticket_to :<input type="text"></p>
+		<p>cost :<input type="text"></p>
+		<p><input type="button" value="Submit" class="btn btn-info"></p>
+	   </form>
+	</div-->
+
             <div>
             <table class="table table-bordered" style="width:400px;">
                 <tr>
@@ -74,8 +87,8 @@
                     <th class="active">定期代</th>
                 </tr>
                 <tr>
-                    <td><?php echo $id->season_ticket_from ?></td>
-                    <td><?php echo $id->season_ticket_to ?></td>
+                    <td><?php echo h($id->season_ticket_from); ?></td>
+                    <td><?php echo h($id->season_ticket_to); ?></td>
                     <td>¥<?php echo number_format($id->season_ticket_cost); ?></td>
                 </tr>
             </div>
@@ -150,13 +163,13 @@
                         <tr class="data_all">
                           <td><?php echo $element->id; ?></td>
                           <td><?php echo $element->date; ?></td>
-                          <td><?php echo $element->client; ?></td>
-                          <td><?php echo $element->vehicle_type; ?></td>
-                          <td><?php echo $element->_from; ?></td>
-                          <td><?php echo $element->_to; ?></td>
+                          <td><?php echo h($element->client); ?></td>
+                          <td><?php echo h($element->vehicle_type); ?></td>
+                          <td><?php echo h($element->_from); ?></td>
+                          <td><?php echo h($element->_to); ?></td>
                           <td>¥<?php echo number_format($element->cost); ?></td>
-                          <td><?php echo $element->one_way_or_round; ?></td>
-                          <td><?php echo $element->overview; ?></td>
+                          <td><?php echo h($element->one_way_or_round); ?></td>
+                          <td><?php echo h($element->overview); ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -175,3 +188,4 @@
     </body>
 
  </html>
+ 

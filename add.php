@@ -1,26 +1,28 @@
 <?php
 
-require_once(__DIR__ . '/config.php');
-require_once(__DIR__ . '/functions.php');
+    require_once(dirname(__FILE__) . '/config.php');
+    require_once(dirname(__FILE__) . '/functions.php');
 
 
-header("Content-type: text/plain; charset=UTF-8");
-if (isset($_POST['date']) && isset($_POST['client']) && isset($_POST['vehicle_id'])
- && isset($_POST['_from']) && isset($_POST['_to']) && isset($_POST['cost']) && isset($_POST['one_way_or_round'])
- && isset($_POST['overview'])){
+    header("Content-type: text/plain; charset=UTF-8");
+
+   if (isset($_POST['date']) && isset($_POST['client']) && isset($_POST['vehicle_id'])
+       && isset($_POST['_from']) && isset($_POST['_to']) && isset($_POST['cost']) && isset($_POST['one_way_or_round'])
+       && isset($_POST['overview'])){
+       
         //ここに何かしらの処理を書く（DB登録やファイルへの書き込みなど）
-            //DBへの接続
+        //DBへの接続
 
-            try {
-              $state = new \PDO(DSN, DB_USERNAME, DB_PASSWORD);
-              $state -> setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-            } catch (\PDOException $e) {
-              echo $e->getMessage();
-              exit;
-            }
+   try {
+         $state = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
+         $state -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	 $state -> query("set names utf8");
+       } catch (PDOException $e) {
+           echo $e->getMessage();
+           exit;
+       }
 
-
-            $sql = $state->prepare("insert into request_details (
+        $sql = $state->prepare("insert into request_details (
                                     date,
                                     client,
                                     vehicle_id,
@@ -49,7 +51,7 @@ if (isset($_POST['date']) && isset($_POST['client']) && isset($_POST['vehicle_id
                 $new_cost = $_POST['cost'];
                 $new_one_way_or_round = $_POST['one_way_or_round'];
                 $new_overview = $_POST['overview'];
-                //echo $new_to;
+               
                 $sql->bindValue(':date', $new_date, PDO::PARAM_STR);
                 $sql->bindValue(':client', $new_client, PDO::PARAM_STR);
                 $sql->bindValue(':vehicle_id', $new_vehicle_id, PDO::PARAM_STR);
@@ -59,26 +61,25 @@ if (isset($_POST['date']) && isset($_POST['client']) && isset($_POST['vehicle_id
                 $sql->bindValue(':one_way_or_round', $new_one_way_or_round, PDO::PARAM_STR);
                 $sql->bindValue(':overview', $new_overview, PDO::PARAM_STR);
 
-                if(!$sql->execute()){
+           if(!$sql->execute()){
                     echo "だめです。";
-                }
-                $sql = null;
+           }
+              $sql = null;
 
-                //リクエストテーブルへの追加
-                $add_request = $state->prepare("insert into requests (staff_id) values (:staff_id)");
-                $staff_id = $_POST['staff_id'];
-                $add_request -> bindValue(':staff_id', $staff_id);
+           //リクエストテーブルへの追加
+           $add_request = $state->prepare("insert into requests (staff_id) values (:staff_id)");
+           $staff_id = $_POST['staff_id'];
+           $add_request -> bindValue(':staff_id', $staff_id);
 
-                if(!$add_request->execute()){
-                    echo "データベースの追加が失敗しました。";
-                }
-                $add_request = null;
+           if(!$add_request->execute()){
+               echo "データベースの追加が失敗しました。";
+           }
+           $add_request = null;
 
-        //echoが返り値？？？？
         echo "登録が完了しました。";
-}
-else
-{
-echo 'データが入力されていません';
-}
+	}
+   else
+   {
+      echo 'データが入力されていません';
+   }
 ?>

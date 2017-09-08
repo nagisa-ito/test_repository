@@ -1,5 +1,7 @@
 <?php
 ini_set('display_errors', 1);
-define('DSN', 'mysql:host=localhost;dbname=transport_expenses');
-define('DB_USERNAME', 'dbuser');
-define('DB_PASSWORD', '#koutuuhi#');
+define('DSN', 'mysql:host=?????;dbname=?????');
+define('DB_USERNAME', '');
+define('DB_PASSWORD', '');
+
+//this file is fake. please replace your config file.

@@ -6,6 +6,7 @@
     try {
       $this->_db = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
       $this->_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $this->_db->query("set names utf8");
     } catch (PDOException $e) {
       echo $e->getMessage();
       exit;
