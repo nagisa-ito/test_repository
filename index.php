@@ -7,7 +7,7 @@
  //get staffs
  $staffApp = new Staff();
  $staffs = $staffApp->getAll();
- 
+
 
  ?>
 
@@ -30,11 +30,15 @@
         <?php echo h($staff->id) . " " . h($staff->staff_name); ?> </option>
     <?php endforeach; ?>
     </select>
-    <div><input type="submit" value="Enter" class="btn btn-default" id="enter_button"></div>
+    <div><input type="submit" value="ログイン" class="btn btn-primary" id="enter_button"></div>
   </form>
-  <form method="post" action="management.php">
-     <div><input type="submit" value="For Master" class="btn btn-primary"></div>
-  </form>	
+  <hr width="500">
+  <form method="post" action="admin.php">
+     <input type="submit" value="管理用" class="btn btn-default">
+  </form>
+  <form method="post" action="register.php">
+     <input type="submit" value="登録" class="btn btn-default">
+  </form>
  </div>
  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
